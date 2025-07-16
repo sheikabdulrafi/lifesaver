@@ -1,0 +1,44 @@
+# Create a simple HTML page with an SMS link
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LifeSaver - Emergency SMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        a.button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚨 LifeSaver - Emergency Alert</h1>
+    <p>If you're in an emergency and want to alert the guardians, tap the button below to open your SMS app:</p>
+    <a class="button" href="sms:+919876543210?body=QR_SCANNED_ID:USERID12345">Send Emergency SMS</a>
+    <p>Thank you for helping someone in need.</p>
+</body>
+</html>
+"""
+
+# Save the HTML to a file for download/view
+html_path = "/mnt/data/lifesaver_sms_helper.html"
+with open(html_path, "w") as f:
+    f.write(html_content)
+
+html_path
