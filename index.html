@@ -14,12 +14,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
     }
 
     .container {
-      max-width: 90%;
+      max-width: 95%;
       background: white;
       padding: 30px;
       border-radius: 16px;
@@ -29,13 +29,23 @@
     h1 {
       font-size: 2rem;
       color: #e53935;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #333;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 25px;
+      width: 90%;
+      max-width: 300px;
     }
 
     a.button {
@@ -54,35 +64,59 @@
     }
 
     .footer {
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 0.9rem;
       color: #777;
+      line-height: 1.4;
     }
 
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      a.button {
-        padding: 12px 20px;
-        font-size: 1rem;
-      }
+    .warning {
+      color: #b71c1c;
+      font-weight: bold;
+      font-size: 0.95rem;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🚨 Emergency Help Needed</h1>
-    <p>
-      This person may need urgent help. Tap the button below to alert their guardians via SMS.
-    </p>
-    <a class="button" href="sms:+919876543210?body=QR_SCANNED_ID:USERID12345">
+    <h1>🚨 LifeSaver Emergency QR</h1>
+    <p>This QR is intended to alert a person's registered guardians in case of a genuine emergency.</p>
+
+    <p><strong>Please select the type of emergency:</strong></p>
+    <select id="emergencyType" onchange="updateLink()">
+      <option value="Accident">Accident</option>
+      <option value="Medical Emergency">Medical Emergency</option>
+      <option value="Fainted">Fainted</option>
+      <option value="Unconscious">Unconscious</option>
+      <option value="Seizure">Seizure</option>
+      <option value="Heart-related">Heart-related</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <br/>
+    <a id="smsLink" class="button" href="sms:+919876543210?body=QR_SCANNED_ID:USERID12345|Accident">
       📩 Send Emergency SMS
     </a>
+
+    <div class="warning">
+      ⚠️ Misuse of this system is a punishable offense. Legal action will be taken against any false or fake alerts.
+    </div>
+
     <div class="footer">
-      You are only a messenger. Personal info is kept private.
+      You are acting as a medium. No personal data is shared with you.<br/>
+      Guardians will respond if the alert is genuine.
     </div>
   </div>
+
+  <script>
+    function updateLink() {
+      const dropdown = document.getElementById("emergencyType");
+      const selectedType = dropdown.value;
+      const smsBody = `QR_SCANNED_ID:USERID12345|${selectedType}`;
+      const link = `sms:+919876543210?body=${encodeURIComponent(smsBody)}`;
+      document.getElementById("smsLink").href = link;
+    }
+  </script>
 </body>
 </html>
