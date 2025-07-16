@@ -76,12 +76,28 @@
       font-size: 0.95rem;
       margin-top: 15px;
     }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      a.button {
+        font-size: 1rem;
+        padding: 12px 20px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🚨 LifeSaver Emergency QR</h1>
+
     <p>This QR is intended to alert a person's registered guardians in case of a genuine emergency.</p>
+
+    <p style="color: #e65100; font-weight: bold;">
+      📩 After the SMS app opens, <u>please press the "Send" button</u> to complete the alert.
+    </p>
 
     <p><strong>Please select the type of emergency:</strong></p>
     <select id="emergencyType" onchange="updateLink()">
@@ -100,12 +116,13 @@
     </a>
 
     <div class="warning">
-      ⚠️ Misuse of this system is a punishable offense. Legal action will be taken against any false or fake alerts.
+      ⚠️ Misuse of this system is a punishable offense.<br/>
+      Legal action will be taken against any false or fake alerts.
     </div>
 
     <div class="footer">
-      You are acting as a medium. No personal data is shared with you.<br/>
-      Guardians will respond if the alert is genuine.
+      You are acting only as a messenger. No personal data is shared with you.<br/>
+      Guardians will verify and take appropriate action.
     </div>
   </div>
 
