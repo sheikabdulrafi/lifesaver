@@ -1,44 +1,88 @@
-# Create a simple HTML page with an SMS link
-html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>LifeSaver - Emergency SMS</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        a.button {
-            display: inline-block;
-            padding: 15px 25px;
-            font-size: 18px;
-            cursor: pointer;
-            text-decoration: none;
-            background-color: #28a745;
-            color: white;
-            border-radius: 5px;
-        }
-        p {
-            font-size: 18px;
-            color: #333;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LifeSaver - Emergency Alert</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 90%;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #e53935;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    a.button {
+      background-color: #d32f2f;
+      color: white;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    a.button:hover {
+      background-color: #b71c1c;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      a.button {
+        padding: 12px 20px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>🚨 LifeSaver - Emergency Alert</h1>
-    <p>If you're in an emergency and want to alert the guardians, tap the button below to open your SMS app:</p>
-    <a class="button" href="sms:+919876543210?body=QR_SCANNED_ID:USERID12345">Send Emergency SMS</a>
-    <p>Thank you for helping someone in need.</p>
+  <div class="container">
+    <h1>🚨 Emergency Help Needed</h1>
+    <p>
+      This person may need urgent help. Tap the button below to alert their guardians via SMS.
+    </p>
+    <a class="button" href="sms:+919876543210?body=QR_SCANNED_ID:USERID12345">
+      📩 Send Emergency SMS
+    </a>
+    <div class="footer">
+      You are only a messenger. Personal info is kept private.
+    </div>
+  </div>
 </body>
 </html>
-"""
-
-# Save the HTML to a file for download/view
-html_path = "/mnt/data/lifesaver_sms_helper.html"
-with open(html_path, "w") as f:
-    f.write(html_content)
-
-html_path
