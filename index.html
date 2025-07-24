@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LifeSaver - Emergency Alert</title>
   <style>
+    /* Same styles as before (no changes) */
     body {
       margin: 0;
       padding: 0;
@@ -111,11 +112,11 @@
     </select>
 
     <br/>
-    <a id="smsLink" class="button" href="sms:+919398969766?body=QR_SCANNED_ID:USERID12345|Accident">
+    <a id="smsLink" class="button" href="#">
       📩 Send Emergency SMS
     </a>
 
-    <div class="warning">
+    <div class="warning" id="warningBox">
       ⚠️ Misuse of this system is a punishable offense.<br/>
       Legal action will be taken against any false or fake alerts.
     </div>
@@ -127,13 +128,36 @@
   </div>
 
   <script>
+    let userId = null;
+
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
     function updateLink() {
       const dropdown = document.getElementById("emergencyType");
       const selectedType = dropdown.value;
-      const smsBody = `QR_SCANNED_ID:USERID12345|${selectedType}`;
+      const smsBody = `QR_SCANNED_ID:${userId}|${selectedType}`;
       const link = `sms:+919398969766?body=${encodeURIComponent(smsBody)}`;
       document.getElementById("smsLink").href = link;
     }
+
+    // Initial setup on page load
+    window.onload = function() {
+      userId = getQueryParam("id");
+
+      if (!userId) {
+        document.getElementById("smsLink").innerText = "❌ User ID missing in URL";
+        document.getElementById("smsLink").style.backgroundColor = "#999";
+        document.getElementById("smsLink").style.pointerEvents = "none";
+        document.getElementById("smsLink").style.cursor = "not-allowed";
+        document.getElementById("warningBox").innerHTML += "<br/><span style='color:#000'>❗ Add <code>?id=USERID</code> to the URL.</span>";
+        return;
+      }
+
+      updateLink(); // prefill SMS link with default type
+    };
   </script>
 </body>
 </html>
